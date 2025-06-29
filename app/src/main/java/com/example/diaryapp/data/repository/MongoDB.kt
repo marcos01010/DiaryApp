@@ -1,0 +1,102 @@
+package com.example.diaryapp.data.repository
+
+import com.example.diaryapp.model.Diary
+import com.example.diaryapp.model.Mood
+import com.example.diaryapp.util.Constants
+import com.example.diaryapp.util.RequestState
+import io.realm.kotlin.Realm
+import io.realm.kotlin.ext.query
+import io.realm.kotlin.ext.realmListOf
+import io.realm.kotlin.mongodb.App
+import io.realm.kotlin.mongodb.sync.SyncConfiguration
+import io.realm.kotlin.query.Sort
+import io.realm.kotlin.types.RealmList
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import java.time.LocalDate
+import java.time.ZoneId
+
+object MongoDB: MongoRepository {
+    private val app = App.Companion.create(Constants.APP_ID)
+    private val user = app.currentUser
+//    private lateinit var realm: Realm
+
+    init {
+        configureTheRealm()
+    }
+
+    override fun configureTheRealm() {
+//        if (user != null) {
+//            val config = SyncConfiguration.Builder(user, setOf(Diary::class))
+//                .initialSubscriptions { sub ->
+//                    add(
+//                        query = sub.query<Diary>(query = "ownerId == $0", user.id),
+//                        name = "User's Diaries"
+//                    )
+//                }
+////                .log(LogLevel.ALL)
+//                .build()
+//            realm = Realm.open(config)
+//        }
+    }
+
+    override fun getAllDiaries(): Flow<Diaries> {
+        return if (user != null){
+            try {
+//                realm.query<Diary>(query = "ownerId == $0", user.id)
+//                    .sort(property = "date", sortOrder = Sort.DESCENDING)
+//                    .asFlow()
+//                    .map { result ->
+//                        RequestState.Success(
+//                            data = result.list.groupBy {
+//                                it.date.toInstant()
+//                                    .atZone(ZoneId.systemDefault())
+//                                    .toLocalDate()
+//                            }
+//                        )
+//                    }
+
+                val result = HashMap<LocalDate, List<Diary>>()
+
+
+                result[LocalDate.parse("2023-01-05")] = listOf(
+                    Diary().apply {
+                        _id = "1"
+                        title = "testetitle1"
+                        description = "testedescription1"
+                        images = realmListOf(
+                            "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                            "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                            "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                            "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                            "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                            "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                            "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on"
+                        )
+                    },
+                    Diary().apply {
+                        _id = "2"
+                        title = "testetitle2"
+                        description = "testedescription2"
+                        images = realmListOf(
+                            "https://vetores.org/wp-content/uploads/udemy.png",
+                            "https://vetores.org/wp-content/uploads/udemy.png",
+                            "https://vetores.org/wp-content/uploads/udemy.png",
+                            "https://vetores.org/wp-content/uploads/udemy.png",
+                            "https://vetores.org/wp-content/uploads/udemy.png",
+                            "https://vetores.org/wp-content/uploads/udemy.png"
+                        )
+                    }
+                )
+
+                flow { emit(RequestState.Success( data = result)) }
+            }catch (e : Exception){
+                flow { emit(RequestState.Error(e)) }
+            }
+        } else {
+            flow { emit(RequestState.Error(UserNotAuthenticatedException())) }
+        }
+    }
+}
+
+private class UserNotAuthenticatedException: Exception("User is not Logged in.")
