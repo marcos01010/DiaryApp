@@ -1,5 +1,6 @@
 package com.example.diaryapp.data.repository
 
+import android.util.Log
 import com.example.diaryapp.model.Diary
 import com.example.diaryapp.model.Mood
 import com.example.diaryapp.util.Constants
@@ -13,6 +14,7 @@ import io.realm.kotlin.query.Sort
 import io.realm.kotlin.types.RealmList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.mongodb.kbson.ObjectId
 import java.time.LocalDate
 import java.time.ZoneId
 
@@ -86,6 +88,7 @@ object MongoDB: MongoRepository {
                             "https://vetores.org/wp-content/uploads/udemy.png",
                             "https://vetores.org/wp-content/uploads/udemy.png"
                         )
+                        mood = Mood.Awful.name
                     }
                 )
 
@@ -95,6 +98,54 @@ object MongoDB: MongoRepository {
             }
         } else {
             flow { emit(RequestState.Error(UserNotAuthenticatedException())) }
+        }
+    }
+    //override fun getSelectedDiary(diaryId: ObjectId): RequestState<Diary> {
+    override fun getSelectedDiary(diaryId: String): RequestState<Diary> {
+        return if (user != null) {
+//            try {
+//                realm.query<Diary>(query = "_id == $0", diaryId).asFlow().map {
+//                    RequestState.Success(data = it.list.first())
+//                }
+//            } catch (e: Exception) {
+//                flow { emit(RequestState.Error(e)) }
+//            }
+
+            Log.d("selectedDiary", diaryId.toString())
+
+            if(diaryId == "1"){
+                RequestState.Success(data = Diary().apply {
+                    _id = "1"
+                    title = "testetitle1"
+                    description = "testedescription1"
+                    images = realmListOf(
+                        "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                        "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                        "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                        "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                        "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                        "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
+                        "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on"
+                    )
+                })
+            }else{
+                RequestState.Success(data = Diary().apply {
+                    _id = "2"
+                    title = "testetitle2"
+                    description = "testedescription2"
+                    images = realmListOf(
+                        "https://vetores.org/wp-content/uploads/udemy.png",
+                        "https://vetores.org/wp-content/uploads/udemy.png",
+                        "https://vetores.org/wp-content/uploads/udemy.png",
+                        "https://vetores.org/wp-content/uploads/udemy.png",
+                        "https://vetores.org/wp-content/uploads/udemy.png",
+                        "https://vetores.org/wp-content/uploads/udemy.png"
+                    )
+                    mood = Mood.Awful.name
+                })
+            }
+        } else {
+            RequestState.Error(UserNotAuthenticatedException())
         }
     }
 }
