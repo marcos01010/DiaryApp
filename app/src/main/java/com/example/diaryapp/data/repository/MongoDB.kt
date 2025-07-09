@@ -104,7 +104,7 @@ object MongoDB: MongoRepository {
         }
     }
     //override fun getSelectedDiary(diaryId: ObjectId): RequestState<Diary> {
-    override fun getSelectedDiary(diaryId: String): RequestState<Diary> {
+    override fun getSelectedDiary(diaryId: String): Flow<RequestState<Diary>> {
         return if (user != null) {
 //            try {
 //                realm.query<Diary>(query = "_id == $0", diaryId).asFlow().map {
@@ -117,7 +117,7 @@ object MongoDB: MongoRepository {
             Log.d("selectedDiary", diaryId.toString())
 
             if(diaryId == "1"){
-                RequestState.Success(data = Diary().apply {
+                flow { emit( RequestState.Success(data = Diary().apply {
                     _id = "1"
                     title = "testetitle1"
                     description = "testedescription1"
@@ -130,9 +130,9 @@ object MongoDB: MongoRepository {
                         "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on",
                         "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on","https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1500x1500/products/90069/97748/Rick-and-Morty-Rick-Morty-Smith-Lifesize-Cardboard-Cutout-buy-now-at-starstills__63410.1678789939.jpg?c=2&imbypass=on"
                     )
-                })
+                }))}
             }else{
-                RequestState.Success(data = Diary().apply {
+                flow { emit( RequestState.Success(data = Diary().apply {
                     _id = "2"
                     title = "testetitle2"
                     description = "testedescription2"
@@ -145,10 +145,10 @@ object MongoDB: MongoRepository {
                         "https://vetores.org/wp-content/uploads/udemy.png"
                     )
                     mood = Mood.Awful.name
-                })
+                }))}
             }
         } else {
-            RequestState.Error(UserNotAuthenticatedException())
+            flow { emit(RequestState.Error(UserNotAuthenticatedException()))}
         }
     }
 
