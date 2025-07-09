@@ -12,8 +12,11 @@ import io.realm.kotlin.mongodb.App
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
 import io.realm.kotlin.query.Sort
 import io.realm.kotlin.types.RealmList
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import org.mongodb.kbson.ObjectId
 import java.time.LocalDate
 import java.time.ZoneId
@@ -147,6 +150,37 @@ object MongoDB: MongoRepository {
         } else {
             RequestState.Error(UserNotAuthenticatedException())
         }
+    }
+
+    override fun addNewDiary(diary: Diary): RequestState<Diary> {
+//        return if (user != null) {
+//            realm.write {
+//                try {
+//                    val addedDiary = copyToRealm(diary.apply { ownerId = user.id })
+//                    RequestState.Success(data = addedDiary)
+//                } catch (e: Exception) {
+//                    RequestState.Error(e)
+//                }
+//            }
+//        } else {
+//            RequestState.Error(UserNotAuthenticatedException())
+//        }
+
+
+        return RequestState.Success(data = Diary().apply {
+            _id = "2"
+            title = "testetitle2"
+            description = "testedescription2"
+            images = realmListOf(
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png"
+            )
+            mood = Mood.Awful.name
+        })
     }
 }
 

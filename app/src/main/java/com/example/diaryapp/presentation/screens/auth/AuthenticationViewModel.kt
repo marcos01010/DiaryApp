@@ -36,7 +36,7 @@ class AuthenticationViewModel : ViewModel() {
                     // If you want to test this app, please ask me to create a password via my email
                     // acc4spams@hotmail.com. Thanks!
                     App.create(APP_ID).login(
-                        Credentials.emailPassword(email = "", password = "")
+                        Credentials.emailPassword(email = "mongo@teste3", password = "-_MXi29zw-EihjY")
                     ).loggedIn
                 }
                 withContext(Dispatchers.Main) {
