@@ -114,7 +114,11 @@ class WriteViewModel(
     }
 
     fun updateDateTime(zonedDateTime: ZonedDateTime){
-        uiState = uiState.copy(updatedDateTime = zonedDateTime.toInstant().toRealmInstant())
+        //if(zonedDateTime != null){
+            uiState = uiState.copy(updatedDateTime = zonedDateTime.toInstant().toRealmInstant())
+//        }else{
+//            uiState = uiState.copy(updatedDateTime = null)
+//        }
     }
 
     private suspend fun updateDiary(
