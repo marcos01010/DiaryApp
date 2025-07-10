@@ -146,6 +146,27 @@ class WriteViewModel(
             }
         //}
     }
+
+    fun deleteDiary(
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (uiState.selectedDiaryId != null){
+                //val result = MongoDB.deleteDiary(id = ObjectId.invoke(uiState.selectedDiaryId!!))
+                val result = MongoDB.deleteDiary(id = uiState.selectedDiaryId!!)
+                if(result is RequestState.Success){
+                    withContext(Dispatchers.Main){
+                        onSuccess()
+                    }
+                }else if (result is RequestState.Error) {
+                    withContext(Dispatchers.Main) {
+                        onError(result.error.message.toString())
+                    }
+                }
+            }
+        }
+    }
 }
 
 data class UiState(
