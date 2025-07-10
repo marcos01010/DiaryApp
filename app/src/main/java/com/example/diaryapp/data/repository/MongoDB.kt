@@ -182,6 +182,41 @@ object MongoDB: MongoRepository {
             mood = Mood.Awful.name
         })
     }
+
+    override suspend fun updateDiary(diary: Diary): RequestState<Diary> {
+//        return if (user != null) {
+//            realm.write {
+//                val queriedDiary = query<Diary>(query = "_id == $0", diary._id).first().find()
+//                if (queriedDiary != null) {
+//                    queriedDiary.title = diary.title
+//                    queriedDiary.description = diary.description
+//                    queriedDiary.mood = diary.mood
+//                    queriedDiary.images = diary.images
+//                    queriedDiary.date = diary.date
+//                    RequestState.Success(data = queriedDiary)
+//                } else {
+//                    RequestState.Error(error = Exception("Queried Diary does not exist."))
+//                }
+//            }
+//        } else {
+//            RequestState.Error(UserNotAuthenticatedException())
+//        }
+
+        return RequestState.Success(data = Diary().apply {
+            _id = "2"
+            title = "testetitle2"
+            description = "testedescription2"
+            images = realmListOf(
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png",
+                "https://vetores.org/wp-content/uploads/udemy.png"
+            )
+            mood = Mood.Awful.name
+        })
+    }
 }
 
 private class UserNotAuthenticatedException: Exception("User is not Logged in.")

@@ -14,4 +14,5 @@ interface MongoRepository {
     //fun getSelectedDiary(diaryId: ObjectId): RequestState<Diary>
     fun getSelectedDiary(diaryId: String): Flow<RequestState<Diary>>
     fun addNewDiary(diary: Diary): RequestState<Diary>
+    suspend fun updateDiary(diary: Diary): RequestState<Diary>
 }
