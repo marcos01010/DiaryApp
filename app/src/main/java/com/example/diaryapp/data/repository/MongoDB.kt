@@ -4,22 +4,12 @@ import android.util.Log
 import com.example.diaryapp.model.Diary
 import com.example.diaryapp.model.Mood
 import com.example.diaryapp.util.Constants
-import com.example.diaryapp.util.RequestState
-import io.realm.kotlin.Realm
-import io.realm.kotlin.ext.query
+import com.example.diaryapp.model.RequestState
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.mongodb.App
-import io.realm.kotlin.mongodb.sync.SyncConfiguration
-import io.realm.kotlin.query.Sort
-import io.realm.kotlin.types.RealmList
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
-import org.mongodb.kbson.ObjectId
 import java.time.LocalDate
-import java.time.ZoneId
 
 object MongoDB: MongoRepository {
     private val app = App.Companion.create(Constants.APP_ID)

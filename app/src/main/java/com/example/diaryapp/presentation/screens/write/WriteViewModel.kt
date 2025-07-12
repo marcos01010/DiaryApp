@@ -10,14 +10,12 @@ import com.example.diaryapp.data.repository.MongoDB
 import com.example.diaryapp.model.Diary
 import com.example.diaryapp.model.Mood
 import com.example.diaryapp.util.Constants
-import com.example.diaryapp.util.RequestState
+import com.example.diaryapp.model.RequestState
 import com.example.diaryapp.util.toRealmInstant
 import io.realm.kotlin.types.RealmInstant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.mongodb.kbson.BsonObjectId
-import org.mongodb.kbson.ObjectId
 import java.time.ZonedDateTime
 
 class WriteViewModel(
