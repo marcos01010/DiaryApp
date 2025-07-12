@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.example.diaryapp.util.Constants
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.stevdzasan.messagebar.ContentWithMessageBar
 import com.stevdzasan.messagebar.MessageBarState
 import com.stevdzasan.onetap.OneTapSignInState
@@ -23,7 +25,8 @@ fun AuthenticationScreen(
     oneTapState: OneTapSignInState,
     messageBarState: MessageBarState,
     onButtonClicked: () -> Unit,
-    onTokenIdReceived: (String) -> Unit,
+    onSuccessfulFirebaseSignIn: (String) -> Unit,
+    onFailedFirebaseSignIn: (Exception) -> Unit,
     onDialogDismisses:  (String) -> Unit,
     navigateToHome: () -> Unit
 ) {
@@ -38,7 +41,7 @@ fun AuthenticationScreen(
                     loadingState = loadingState,
                     onButtonClicked =  {
                         onButtonClicked()
-                        onTokenIdReceived("")
+                        onSuccessfulFirebaseSignIn("")
                     }
                 )
             }
@@ -49,7 +52,16 @@ fun AuthenticationScreen(
         state = oneTapState,
         clientId = Constants.CLIENT_ID,
         onTokenIdReceived = { tokenId ->
-            onTokenIdReceived(tokenId)
+            val credential = GoogleAuthProvider.getCredential(tokenId, null)
+//            FirebaseAuth.getInstance().signInWithCredential(credential)
+//                .addOnCompleteListener { task ->
+//                    if(task.isSuccessful) {
+//                        onSuccessfulFirebaseSignIn(tokenId)
+//                    } else {
+//                        task.exception?.let { onFailedFirebaseSignIn(it) }
+//                    }
+//                }
+            onSuccessfulFirebaseSignIn(tokenId)
         },
         onDialogDismissed = { message ->
             onDialogDismisses(message)
