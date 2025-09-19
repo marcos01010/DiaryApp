@@ -7,9 +7,14 @@ import com.example.diaryapp.util.Constants
 import com.example.diaryapp.model.RequestState
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.mongodb.App
+import io.realm.kotlin.types.RealmInstant
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 object MongoDB: MongoRepository {
     private val app = App.Companion.create(Constants.APP_ID)
@@ -93,6 +98,43 @@ object MongoDB: MongoRepository {
             flow { emit(RequestState.Error(UserNotAuthenticatedException())) }
         }
     }
+
+    override fun getFilteredDiaries(zonedDateTime: ZonedDateTime): Flow<Diaries> {
+        return getAllDiaries()
+//        return if (user != null) {
+//            try {
+//                realm.query<Diary>(
+//                    "ownerId == $0 AND date < $1 AND date > $2",
+//                    user.id,
+//                    RealmInstant.from(
+//                        LocalDateTime.of(
+//                            zonedDateTime.toLocalDate().plusDays(1),
+//                            LocalTime.MIDNIGHT
+//                        ).toEpochSecond(zonedDateTime.offset), 0
+//                    ),
+//                    RealmInstant.from(
+//                        LocalDateTime.of(
+//                            zonedDateTime.toLocalDate(),
+//                            LocalTime.MIDNIGHT
+//                        ).toEpochSecond(zonedDateTime.offset), 0
+//                    ),
+//                ).asFlow().map { result ->
+//                    RequestState.Success(
+//                        data = result.list.groupBy {
+//                            it.date.toInstant()
+//                                .atZone(ZoneId.systemDefault())
+//                                .toLocalDate()
+//                        }
+//                    )
+//                }
+//            } catch (e: Exception) {
+//                flow { emit(RequestState.Error(e)) }
+//            }
+//        } else {
+//            flow { emit(RequestState.Error(UserNotAuthenticatedException())) }
+//        }
+    }
+
     //override fun getSelectedDiary(diaryId: ObjectId): RequestState<Diary> {
     override fun getSelectedDiary(diaryId: String): Flow<RequestState<Diary>> {
         return if (user != null) {

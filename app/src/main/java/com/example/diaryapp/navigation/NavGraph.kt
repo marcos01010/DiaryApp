@@ -164,9 +164,12 @@ fun NavGraphBuilder.homeRoute(
             onSingOutClicked = {
                 signOutDialogOpened = true
             },
+            dateIsSelected = viewModel.dateIsSelected,
+            onDateSelected = { viewModel.getDiaries(zonedDateTime = it) },
             onDeleteAllClicked = {},
             navigateToWrite = navigateToWrite,
-            navigateToWriteWithArgs = navigateToWriteWithArgs
+            navigateToWriteWithArgs = navigateToWriteWithArgs,
+            onDateReset = { viewModel.getDiaries() }
         )
 
         DisplayAlertDialog(

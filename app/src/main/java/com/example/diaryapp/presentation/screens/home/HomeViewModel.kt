@@ -18,8 +18,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.ZonedDateTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,11 +30,16 @@ class HomeViewModel @Inject constructor(
     private val connectivity: NetworkConnectivityObserver,
     private val imageToDeleteDao: ImageToDeleteDao
 ): ViewModel() {
+    private lateinit var allDiariesJob: Job
+    private lateinit var filteredDiariesJob: Job
+
     private var network by mutableStateOf(ConnectivityObserver.Status.Unavailable)
     var diaries: MutableState<Diaries> = mutableStateOf(RequestState.Idle)
+    var dateIsSelected by mutableStateOf(false)
+        private set
 
     init {
-        observeAllDiaries()
+        getDiaries()
         viewModelScope.launch {
             connectivity.observe().collect{
                 network = it
@@ -39,11 +47,35 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getDiaries(zonedDateTime: ZonedDateTime? = null){
+        dateIsSelected = zonedDateTime != null
+        diaries.value = RequestState.Loading
+        if(dateIsSelected && zonedDateTime !=null){
+            observeFilteredDiaries(zonedDateTime = zonedDateTime)
+        }else {
+            observeAllDiaries()
+        }
+    }
+
     private fun observeAllDiaries(){
         Log.d("diares", "hello")
-        viewModelScope.launch {
+        allDiariesJob = viewModelScope.launch {
+            if(::filteredDiariesJob.isInitialized){
+                filteredDiariesJob.cancelAndJoin()
+            }
             MongoDB.getAllDiaries().collect { result ->
                 Log.d("diares", result.toString())
+                diaries.value = result
+            }
+        }
+    }
+
+    private fun observeFilteredDiaries(zonedDateTime: ZonedDateTime) {
+        filteredDiariesJob = viewModelScope.launch {
+            if(::allDiariesJob.isInitialized){
+                allDiariesJob.cancelAndJoin()
+            }
+            MongoDB.getFilteredDiaries(zonedDateTime).collect { result ->
                 diaries.value = result
             }
         }

@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import com.example.diaryapp.R
 import com.example.diaryapp.data.repository.Diaries
 import com.example.diaryapp.model.RequestState
+import java.time.ZonedDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -53,7 +54,10 @@ fun HomeScreen(
     onSingOutClicked: () -> Unit,
     navigateToWrite: () -> Unit,
     onDeleteAllClicked: () -> Unit,
-    navigateToWriteWithArgs: (String) -> Unit
+    navigateToWriteWithArgs: (String) -> Unit,
+    dateIsSelected: Boolean,
+    onDateSelected: (ZonedDateTime) -> Unit,
+    onDateReset: () -> Unit
 ) {
     var padding by remember {
         mutableStateOf(PaddingValues())
@@ -69,7 +73,10 @@ fun HomeScreen(
             topBar = {
                 HomeTopBar(
                     scrollBehavior = scrollBehavior,
-                    onMenuClicked = onMenuClicked
+                    onMenuClicked = onMenuClicked,
+                    dateIsSelected = dateIsSelected,
+                    onDateselected = onDateSelected,
+                    onDateReset = onDateReset
                 )
             },
             floatingActionButton = {
