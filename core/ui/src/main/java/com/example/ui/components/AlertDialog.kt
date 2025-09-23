@@ -1,4 +1,4 @@
-package com.example.diaryapp.presentation.components
+package com.example.ui.components
 
 
 import androidx.compose.material3.*

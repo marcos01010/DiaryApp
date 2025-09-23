@@ -1,7 +1,6 @@
 package com.example.diaryapp.presentation.screens.write
 
 import android.net.Uri
-import android.widget.Space
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -47,7 +45,7 @@ import com.example.diaryapp.model.Diary
 import com.example.diaryapp.model.GalleryImage
 import com.example.diaryapp.model.GalleryState
 import com.example.diaryapp.model.Mood
-import com.example.diaryapp.presentation.components.GalleryUploader
+import com.example.ui.components.GalleryUploader
 import io.realm.kotlin.ext.toRealmList
 import kotlinx.coroutines.launch
 

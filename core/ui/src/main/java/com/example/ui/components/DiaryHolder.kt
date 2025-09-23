@@ -1,8 +1,6 @@
-package com.example.diaryapp.presentation.components
+package com.example.ui.components
 
 import android.net.Uri
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -45,8 +43,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.diaryapp.model.Diary
 import com.example.diaryapp.model.Mood
-import com.example.diaryapp.ui.theme.Elevation
-import com.example.diaryapp.util.fetchImagesFromFirebase
+import com.example.ui.theme.Elevation
 import com.example.diaryapp.util.toInstant
 import io.realm.kotlin.ext.realmListOf
 import java.text.SimpleDateFormat
