@@ -114,4 +114,5 @@ dependencies {
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     implementation(project(":core:ui"))
+    implementation(project(":core:util"))
 }

@@ -27,6 +27,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -45,4 +46,9 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.coil.compose)
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    implementation(libs.library.sync)
+    implementation(libs.kotlinx.coroutines.core)
+
+    implementation(project(":core:util"))
 }

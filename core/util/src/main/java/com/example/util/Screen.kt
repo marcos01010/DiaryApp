@@ -1,4 +1,4 @@
-package com.example.diaryapp.navigation
+package com.example.util
 
 import com.example.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
 

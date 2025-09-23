@@ -1,5 +1,6 @@
 package com.example.diaryapp.connectivity
 
+import com.example.util.connectivity.ConnectivityObserver
 import kotlinx.coroutines.flow.Flow
 
 interface ConnectivityObserver {

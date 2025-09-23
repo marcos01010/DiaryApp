@@ -14,12 +14,12 @@ import com.example.diaryapp.data.database.ImageToUploadDao
 import com.example.diaryapp.data.database.entity.ImageToDelete
 import com.example.diaryapp.data.database.entity.ImageToUpload
 import com.example.diaryapp.data.repository.MongoDB
-import com.example.diaryapp.model.Diary
+import com.example.util.model.Diary
 import com.example.diaryapp.model.GalleryImage
 import com.example.diaryapp.model.GalleryState
-import com.example.diaryapp.model.Mood
+import com.example.util.model.Mood
 import com.example.diaryapp.util.Constants
-import com.example.diaryapp.model.RequestState
+import com.example.util.model.RequestState
 import com.example.diaryapp.util.toRealmInstant
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
