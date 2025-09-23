@@ -27,6 +27,8 @@ roomRuntime = "2.6.1"
 ui = "1.6.7"
 googleGms = "4.4.2"
 ksp = "2.0.0-1.0.21"
+appcompat = "1.7.1"
+material = "1.13.0"
 
 [libraries]
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
@@ -63,6 +65,8 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 library-sync = { module = "io.realm.kotlin:library-sync", version.ref = "librarySync" }
 messagebarcompose = { module = "com.github.stevdza-san:MessageBarCompose", version.ref = "messagebarcompose" }
 onetapcompose = { module = "com.github.stevdza-san:OneTapCompose", version.ref = "onetapcompose" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.example.diaryapp"
-    compileSdk = 35
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
         applicationId = "com.example.diaryapp"
-        minSdk = 24
-        targetSdk = 35
+        minSdk = ProjectConfig.minSdk
+        targetSdk = ProjectConfig.targetSdk
         versionCode = 1
         versionName = "1.0"
 
@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.4"
+        kotlinCompilerExtensionVersion = ProjectConfig.extensionVersion
     }
 }
 
@@ -112,4 +112,6 @@ dependencies {
 
     // Desugar JDK
     coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+    implementation(project(":core:ui"))
 }
