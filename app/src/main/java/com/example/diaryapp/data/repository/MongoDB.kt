@@ -288,6 +288,7 @@ object MongoDB: MongoRepository {
 //        } else {
 //            RequestState.Error(UserNotAuthenticatedException())
 //        }
+        // - teste
     }
 }
 
