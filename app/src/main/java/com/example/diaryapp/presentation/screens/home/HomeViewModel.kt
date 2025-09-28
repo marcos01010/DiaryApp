@@ -2,17 +2,17 @@ package com.example.diaryapp.presentation.screens.home
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import com.example.util.connectivity.ConnectivityObserver
 import com.example.diaryapp.connectivity.NetworkConnectivityObserver
-import com.example.diaryapp.data.database.ImageToDeleteDao
-import com.example.diaryapp.data.database.entity.ImageToDelete
-import com.example.diaryapp.data.repository.Diaries
-import com.example.diaryapp.data.repository.MongoDB
+import com.example.mongo.database.ImageToDeleteDao
+import com.example.mongo.database.entity.ImageToDelete
+import com.example.mongo.repository.Diaries
+import com.example.mongo.repository.MongoDB
+import com.example.util.connectivity.ConnectivityObserver
 import com.example.util.model.RequestState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage

@@ -39,16 +39,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = ProjectConfig.extensionVersion
     }
+    packagingOptions  {
+        excludes += "/META-INF/gradle/incremental.annotation.processors"
+    }
 }
 
 dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.coil.compose)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.library.sync)
     implementation(libs.kotlinx.coroutines.core)
 
-    implementation(project(":core:util"))
 }

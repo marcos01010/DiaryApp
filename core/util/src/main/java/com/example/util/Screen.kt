@@ -1,6 +1,6 @@
 package com.example.util
 
-import com.example.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
+import com.example.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
 
 sealed class Screen(val route: String){
     object Authentication: Screen(route = "authentication_screen")

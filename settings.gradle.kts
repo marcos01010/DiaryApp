@@ -26,3 +26,4 @@ rootProject.name = "DiaryApp"
 include(":app")
 include(":core:ui")
 include(":core:util")
+include(":data:mongo")

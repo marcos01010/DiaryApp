@@ -1,11 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.21"
+    id("com.google.devtools.ksp") version "2.0.21-1.0.26"
+    id("com.google.dagger.hilt.android")
+    id("io.realm.kotlin")
 }
 
 android {
-    namespace = "com.example.util"
+    namespace = "com.example.mongo"
     compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
@@ -33,27 +35,21 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = ProjectConfig.extensionVersion
-    }
     packagingOptions  {
         excludes += "/META-INF/gradle/incremental.annotation.processors"
     }
 }
 
 dependencies {
-    implementation(libs.firebase.storage.ktx)
-    implementation(libs.library.sync)
-    implementation(libs.kotlinx.coroutines.core)
+
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.library.sync)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.coil.compose)
-    implementation(project(":core:ui"))
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.compiler)
+    implementation(project(":core:util"))
 }

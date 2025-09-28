@@ -45,6 +45,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = ProjectConfig.extensionVersion
     }
+    packagingOptions  {
+        excludes += "/META-INF/gradle/incremental.annotation.processors"
+    }
 }
 
 dependencies {
@@ -115,4 +118,5 @@ dependencies {
 
     implementation(project(":core:ui"))
     implementation(project(":core:util"))
+    implementation(project(":data:mongo"))
 }
