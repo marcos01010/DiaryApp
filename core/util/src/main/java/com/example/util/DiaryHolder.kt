@@ -1,4 +1,4 @@
-package com.example.ui.components
+package com.example.util
 
 import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
@@ -41,18 +41,18 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.diaryapp.model.Diary
-import com.example.diaryapp.model.Mood
+import androidx.core.net.toUri
 import com.example.ui.theme.Elevation
-import com.example.diaryapp.util.toInstant
+import com.example.util.model.Diary
+import com.example.util.model.Mood
+import com.example.util.toInstant
 import io.realm.kotlin.ext.realmListOf
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.util.Date
 import java.util.Locale
-import androidx.core.net.toUri
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 @Composable
 fun DiaryHolder(

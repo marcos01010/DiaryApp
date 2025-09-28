@@ -1,4 +1,4 @@
-package com.example.ui.components
+package com.example.util
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -34,8 +34,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.diaryapp.model.GalleryImage
-import com.example.diaryapp.model.GalleryState
 import com.example.ui.GalleryImage
 import com.example.ui.GalleryState
 import com.example.ui.theme.Elevation

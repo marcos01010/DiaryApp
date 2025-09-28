@@ -27,6 +27,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -38,11 +39,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = ProjectConfig.extensionVersion
     }
+    packagingOptions  {
+        excludes += "/META-INF/gradle/incremental.annotation.processors"
+    }
 }
 
 dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.coil.compose)
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    implementation(libs.library.sync)
+    implementation(libs.kotlinx.coroutines.core)
+
 }

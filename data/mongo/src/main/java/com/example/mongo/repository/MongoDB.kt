@@ -1,25 +1,22 @@
-package com.example.diaryapp.data.repository
+package com.example.mongo.repository
 
 import android.util.Log
-import com.example.diaryapp.model.Diary
-import com.example.diaryapp.model.Mood
-import com.example.diaryapp.util.Constants
-import com.example.diaryapp.model.RequestState
+import com.example.util.Constants
+import com.example.util.model.Diary
+import com.example.util.model.Mood
+import com.example.util.model.RequestState
+import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.mongodb.App
-import io.realm.kotlin.types.RealmInstant
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.ZoneId
 import java.time.ZonedDateTime
 
 object MongoDB: MongoRepository {
     private val app = App.Companion.create(Constants.APP_ID)
     private val user = app.currentUser
-//    private lateinit var realm: Realm
+    //private lateinit var realm: Realm
 
     init {
         configureTheRealm()
